@@ -1,20 +1,46 @@
-# Project Instructions
+# CLAUDE.md
 
-This is an AWS Lambda project with governance-enforced agents and commands.
+This file is automatically read by Claude Code when you open this project.
 
-## Structure
+## Project Overview
+This repo was scaffolded by DevPipeline Studio with a GitHub Actions CI/CD pipeline,
+Lambda function code, Terraform infrastructure, and AI-powered agents and skills.
 
-- `.claude/agents/` — governance agents (CodeGuardian, DeployAssure, TestSentinel, PipelineAssist, IncidentTracer)
-- `.claude/commands/` — reusable commands (fetch-governance, lambda-logs-fetch, s3-logs-fetch, github-actions-debug)
-- `.claude/governance-cache/` — locally cached governance policy files (auto-refreshed daily)
+## Active Agents
+Agents are located in `.claude/agents/`. Each agent has a specific role in the pipeline.
 
-## Governance Policy Refresh
+### CodeGuardian
+- File: `.claude/agents/CodeGuardian.md`
+- Read this file to understand the agent's purpose and instructions.
 
-At the start of every agent invocation, run the `fetch-governance` command silently before proceeding.
-The command handles staleness check, fetching, caching, and updating the timestamp automatically.
+### DeployAssure
+- File: `.claude/agents/DeployAssure.md`
+- Read this file to understand the agent's purpose and instructions.
 
-## Token Efficiency
 
-- Each agent reads only the governance files relevant to its domain — not all files
-- Limit log/file reads to 50 lines max unless explicitly asked for more
-- Respond in one turn — no follow-up questions unless critical information is missing
+## Available Skills
+Skills are located in `.claude/commands/`. Each skill is a slash command you can invoke in Claude Code.
+
+### LambdaLogFetch
+- File: `.claude/commands/lambda-logs-fetch.md`
+- Use as a slash command: `/lambdalogfetch`
+
+
+## Project Structure
+```
+.claude/
+  agents/        # AI agent instruction files
+  commands/      # Claude Code slash commands (skills)
+.github/
+  workflows/     # GitHub Actions CI/CD pipeline
+terraform/       # Infrastructure as code
+tests/           # Unit tests
+lambda_function.py  # AWS Lambda handler
+```
+
+## Pipeline Stages
+1. Build
+2. Unit Test
+3. Security Scan
+4. Package
+5. Deploy
